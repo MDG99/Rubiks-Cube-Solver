@@ -3,30 +3,54 @@
 # Press Mayús+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
+"""
+La contrucción del cubo de rubik está implementada como se ve a continuación:
+
+        UUU
+        UUU
+        UUU
+    LLL FFF RRR BBB
+    LLL FFF RRR BBB
+    LLL FFF RRR BBB
+        DDD
+        DDD
+        DDD
+
+Donde:
+        La región F (Front) es la perteneciente a la cara frontal del cubo.
+        La región B (Back) es la perteneciente a la cara trasera del cubo.
+        La región R (Right) es la perteneciente a la cara derecha del cubo.
+        La región L (Left) es la perteneciente a la cara izquierda del cubo.
+        La región U (Up) es la perteneciente a la cara superior del cubo.
+        La región D (Down) es la perteneciente a la cara inferior del cubo.
+
+Los colores de las piezas se imprimen de acuerdo a sus inciales en inglés.
+"""
+
+
 class Tupla:
-    # Arreglo de colores
-    color = []
-    # Arreglo de orientaciones
-    orien = []
+    color = []  # Arreglo de colores de las piezas
+    orien = []  # Arreglo de orientaciones de las piezas
 
     def __init__(self, numTuplas):
+        # Se inicializan los arreglos para que tengan el tamaño del número de tuplas
         self.color = ["" for x in range(numTuplas)]
         self.orien = ["" for x in range(numTuplas)]
 
 
-# 1 color y orientación para piezas centrales
+# 1 color y 1 orientación para piezas centrales (1 dimensión)
 class Central:
     def __init__(self):
         self.tupla = Tupla(1)
 
 
-# 2 colores y 2 orientaciones para piezas laterales
+# 2 colores y 2 orientaciones para piezas laterales (2 dimensiones)
 class Lateral:
     def __init__(self):
         self.tupla = Tupla(2)
 
 
-# 3 colores y 3 orientaciones para piezas laterales
+# 3 colores y 3 orientaciones para piezas esquina (3 dimensiones)
 class Esquina:
     def __init__(self):
         self.tupla = Tupla(3)
@@ -37,19 +61,18 @@ class Piezas:
     pieza_lateral = []
     pieza_esquina = []
 
+    # Se inicializan los arreglos de objetos con el número correspondiente de piezas según sus clases
     def __init__(self):
-        # self.pieza_central = [6]
         for i in range(0, 6):
             self.pieza_central.append(Central())
 
-        # self.pieza_lateral = [12]
         for i in range(0, 12):
             self.pieza_lateral.append(Lateral())
 
-        # self.pieza_esquina = [8]
         for i in range(0, 8):
             self.pieza_esquina.append(Esquina())
 
+    # Buscar las piezas centrales
     def quienCentral(self, orient):
         esta = False
         color = " "
@@ -65,6 +88,7 @@ class Piezas:
             i = i + 1
         return color
 
+    # Buscar las piezas laterales
     def quienLateral(self, orient1, orient2, orientColor):
         esta = pos1 = pos2 = False
         i = 0
@@ -94,6 +118,7 @@ class Piezas:
                 i = i + 1
         return color
 
+    # Buscar las piezas esquina
     def quienEsquina(self, orient1, orient2, orient3, orientColor):
         esta = pos1 = pos2 = pos3 = False
         i = 0
@@ -132,6 +157,7 @@ class Piezas:
                 i = i + 1
         return color
 
+    # Impresión de piezas en la consola (por cada fila) con la configuración implementada del cubo
     def imprimePieza(self):
         print(
             "    " + Piezas.quienEsquina(self, "U", "L", "B", "U") + Piezas.quienLateral(self, "U", "B", "U") +
@@ -174,6 +200,7 @@ class Piezas:
             Piezas.quienEsquina(self, "D", "R", "B", "D"))
         print("\n")
 
+    # Se inicializan los arreglos de las piezas: sus colores y su orientaciones
     def iniciaPiezas(self):
         # Piezas centrales:
         self.pieza_central[0].tupla.color[0] = "B"
@@ -287,9 +314,10 @@ class Piezas:
         self.pieza_esquina[7].tupla.color[2] = "W"
         self.pieza_esquina[7].tupla.orien[2] = "B"
 
+    # Movimiento horizontal respecto a la cara frontal (Yellow) --> paras ejes U y D
     def movHorizontal(self, cara, signo):
-        # signo = 0 --> giro con las manecillas del reloj
-        # signo = 1 --> giro contra las manecillas del reloj
+        # signo = 0 --> giro con las manecillas del reloj (de izquierda a derecha respecto a la cara frontal)
+        # signo = 1 --> giro contra las manecillas del reloj (de derecha a izquierda respecto a la cara frontal)
         movsH = ["F", "L", "B", "R"]
         for i in range(0, len(self.pieza_lateral)):
             for j in range(0, len(self.pieza_lateral[i].tupla.orien)):
@@ -330,12 +358,58 @@ class Piezas:
                                     caraNueva = 0
                             self.pieza_esquina[i].tupla.orien[k] = movsH[caraNueva]
 
+    # Movimiento vertical respecto a la cara frontal (Yellow) --> paras ejes R y L
+    def movVertical(self, cara, signo):
+        # signo = 0 --> giro con las manecillas del reloj (de arriba hacia abajo respecto a la cara frontal)
+        # signo = 1 --> giro contra las manecillas del reloj (de bajo hacia arriba respecto a la cara frontal)
+        movsV = ["F", "D", "B", "U"]
+        for i in range(0, len(self.pieza_lateral)):
+            for j in range(0, len(self.pieza_lateral[i].tupla.orien)):
+                if self.pieza_lateral[i].tupla.orien[j] == cara:
+                    for k in range(0, len(self.pieza_lateral[i].tupla.orien)):
+                        if self.pieza_lateral[i].tupla.orien[k] != cara:
+                            caraActual = self.pieza_lateral[i].tupla.orien[k]
+                            caraNueva = 0
+                            while caraActual != movsV[caraNueva]:
+                                caraNueva = caraNueva + 1
+                            if signo == 0:
+                                caraNueva = caraNueva + 1
+                            else:
+                                caraNueva = caraNueva - 1
+                            if caraNueva < 0:
+                                caraNueva = 3
+                            else:
+                                if caraNueva > 3:
+                                    caraNueva = 0
+                            self.pieza_lateral[i].tupla.orien[k] = movsV[caraNueva]
+        for i in range(0, len(self.pieza_esquina)):
+            for j in range(0, len(self.pieza_esquina[i].tupla.orien)):
+                if self.pieza_esquina[i].tupla.orien[j] == cara:
+                    for k in range(0, len(self.pieza_esquina[i].tupla.orien)):
+                        if self.pieza_esquina[i].tupla.orien[k] != cara:
+                            caraActual = self.pieza_esquina[i].tupla.orien[k]
+                            caraNueva = 0
+                            while caraActual != movsV[caraNueva]:
+                                caraNueva = caraNueva + 1
+                            if signo == 0:
+                                caraNueva = caraNueva + 1
+                            else:
+                                caraNueva = caraNueva - 1
+                            if caraNueva < 0:
+                                caraNueva = 3
+                            else:
+                                if caraNueva > 3:
+                                    caraNueva = 0
+                            self.pieza_esquina[i].tupla.orien[k] = movsV[caraNueva]
+
 
 def main():
-    cubo = Piezas()
-    cubo.iniciaPiezas()
+    cubo = Piezas()             # Objecto de la clase Piezas
+    cubo.iniciaPiezas()         # Se inicializan los colores y orientaciones de las piezas del cubo
+    cubo.imprimePieza()         # Se imprime el cubo en la consola con configuración implementada
+    cubo.movHorizontal("U", 0)  # Ejemplo movimiento horizontal
     cubo.imprimePieza()
-    cubo.movHorizontal("U", 0)
+    cubo.movVertical("L", 0)    # Ejemplo movimiento vertical
     cubo.imprimePieza()
 
 
