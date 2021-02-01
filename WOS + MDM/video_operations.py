@@ -21,9 +21,11 @@ video = cv2.VideoCapture(2)
 #video.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
 
 
-def draw_the_frame(image_to_draw, face):
+def draw_the_frame(image_to_draw, n):
 
-    txt_to_write = f"Cara {face}"
+    face = ["Up", "Down", "Right", "Left", "Front", "Back"]
+
+    txt_to_write = f"Cara {face[n]}"
 
     #Texto
     cv2.putText(image_to_draw, txt_to_write,(500, 61), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 3)
@@ -55,6 +57,8 @@ def get_the_video(face):
             _, frame = video.read()
             # Guardo en variables diferentes cada una de las regiones del cubo
 
+            final_frame = frame[yi:yf, xi:xf]
+
             # Valores de la primera fila
             a = frame[yi: yi + salto_y, xi: xi + salto_x]
             b = frame[yi: yi + salto_y, xi + salto_x: xi + 2 * salto_x]
@@ -76,4 +80,4 @@ def get_the_video(face):
     video.release()
     cv2.destroyAllWindows()
 
-    return a, b, c, d, e, f, g, h, i
+    return a, b, c, d, e, f, g, h, i, final_frame
