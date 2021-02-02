@@ -93,7 +93,6 @@ class Esquina:
 
 def traductor(cadena):
     cubo = Piezas()
-    cubo.iniciaPiezas()
     for i in range(len(cadena)):
         if cadena[i] == "F":
             cubo.movEjesFB("F", 0)
@@ -132,9 +131,9 @@ def traductor(cadena):
             cubo.imprimePieza()
             cubo.movEjesUD("U", 0)
         elif cadena[i] == "L2":
-            cubo.movEjesRL("L2", 0)
+            cubo.movEjesRL("L", 0)
             cubo.imprimePieza()
-            cubo.movEjesRL("L2", 0)
+            cubo.movEjesRL("L", 0)
         elif cadena[i] == "B2":
             cubo.movEjesFB("B", 1)
             cubo.imprimePieza()
@@ -640,16 +639,26 @@ def main():
 
     cubo = Piezas()
 
-    piezaCC = ["B", "R", "W", "G", "Y", "O"]    # Esta configuración es inamovible (6 colores para piezas centrales)
+    piezaCC = ["G", "R", "Y", "B", "W", "O"]    # Esta configuración es inamovible (6 colores para piezas centrales)
     piezaOC = ["R", "F", "U", "L", "D", "B"]    # Esta configuración es inamovible (6 orientaciones para centrales)
 
-    piezaCL = ["W", "R", "B", "R", "Y", "R", "G", "R", "W", "B", "W", "G", "Y", "B", "Y", "G", "W", "O", "G", "O", "B",
-               "O", "Y", "O"]   # 24 colores para las piezas laterales
+    """ PARA CONSTRUCCIÓN DEL CUBO CON LAS CARAS DEL MISMO COLOR DE PIEZAS
+    piezaCL = ["Y", "R", "G", "R", "W", "R", "B", "R", "Y", "G", "Y", "B", "W", "G", "W", "B", "Y", "O", "B", "O", "G",
+               "O", "W", "O"]   # 24 colores para las piezas laterales
+    """
+    # EJEMPLO CON CARAS SIN LOS MISMOS COLORES DE PIEZAS
+    piezaCL = ["Y", "R", "G", "R", "W", "R", "B", "R", "Y", "G", "Y", "B", "W", "O", "W", "B", "Y", "O", "B", "O", "G",
+               "O", "W", "G"]  # 24 colores para las piezas laterales
     piezaOL = ["U", "F", "R", "F", "D", "F", "L", "F", "U", "R", "U", "L", "D", "R", "D", "L", "U", "B", "L", "B", "R",
                "B", "D", "B"]   # Esta configuración es inamovible (24 orientaciones para las piezas laterales)
 
-    piezaCE = ["W", "R", "B", "W", "R", "G", "Y", "R", "B", "Y", "R", "G", "W", "B", "O", "W", "G", "O", "Y", "B", "O",
-               "Y", "G", "O"]   # 24 colores para las piezas esquina
+    """ PARA CONSTRUCCIÓN DEL CUBO CON LAS CARAS DEL MISMO COLOR DE PIEZAS
+    piezaCE = ["Y", "R", "G", "Y", "R", "B", "W", "R", "G", "W", "R", "B", "Y", "G", "O", "Y", "B", "O", "W", "G", "O",
+               "W", "B", "O"]   # 24 colores para las piezas esquina
+               """
+    # EJEMPLO CON CARAS SIN LOS MISMOS COLORES DE PIEZAS
+    piezaCE = ["Y", "R", "G", "Y", "R", "B", "B", "R", "W", "O", "W", "B", "Y", "G", "O", "Y", "B", "O", "W", "R", "G",
+               "G", "W", "O"]  # 24 colores para las piezas esquina
     piezaOE = ["U", "F", "R", "U", "F", "L", "D", "F", "R", "D", "F", "L", "U", "R", "B", "U", "L", "B", "D", "R", "B",
                "D", "L", "B"]   # Esta configuración es inamovible (24 orientaciones para las piezas esquina)
 
