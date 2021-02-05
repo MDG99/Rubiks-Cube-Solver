@@ -1,20 +1,10 @@
 import cv2
-import numpy as np
 from video_operations import get_the_video
 from filtro import mediana
-from media_aritmetica import media
 from operations import wos, mdm
 from mapeo_colores import mapeo
-
-def valores_M(img, banda_R, banda_G, banda_B):
-    aux = media(img)
-
-    banda_R = banda_R + aux[2]
-    banda_G = banda_G + aux[1]
-    banda_B = banda_B + aux[0]
-
-    return banda_R, banda_G, banda_B
-
+from normalizar import normalizar
+from prueba import media_color
 
 def lectura_cara(n):
 
@@ -69,48 +59,18 @@ def lectura_cara(n):
     mis_colores.append(mapeo(mdm_i))
 
     print(mis_colores)
+    cv2.imwrite("a.jpg", a)
+    #cv2.imwrite("a_suavizado.jpg", a_m)
 
     cv2.imwrite("wos_a.jpg", wos_a)
     cv2.imwrite("mdm_a.jpg", mdm_a)
     cv2.imwrite("wos_final.jpg", wos_final)
     cv2.imwrite("mdm_final.jpg", mdm_final)
 
-banda_R = 0
-banda_G = 0
-banda_B = 0
+
 
 lectura_cara(0)
+#media_color()
 
 
 
-# Obteniendo el valor medio para cada color
-#banda_R, banda_G, banda_B = valores_M(a, banda_R, banda_G, banda_B)
-#banda_R, banda_G, banda_B = valores_M(c, banda_R, banda_G, banda_B)
-#banda_R, banda_G, banda_B = valores_M(d, banda_R, banda_G, banda_B)
-#banda_R, banda_G, banda_B = valores_M(e, banda_R, banda_G, banda_B)
-#banda_R, banda_G, banda_B = valores_M(f, banda_R, banda_G, banda_B)
-#banda_R, banda_G, banda_B = valores_M(g, banda_R, banda_G, banda_B)
-#banda_R, banda_G, banda_B = valores_M(h, banda_R, banda_G, banda_B)
-#banda_R, banda_G, banda_B = valores_M(i, banda_R, banda_G, banda_B)
-
-#banda_R = banda_R / 9
-#banda_G = banda_G / 9
-#banda_B = banda_B / 9
-
-#print(round(banda_R))
-#print(round(banda_G))
-#print(round(banda_B))
-
-#a_m = mediana(a)1
-
-#cv2.imwrite("a.jpg", a)
-#cv2.imwrite("a_suavizado.jpg", a_m)
-
-# cv2.imwrite("b.jpg", cara_1[1])
-# cv2.imwrite("c.jpg", cara_1[2])
-# cv2.imwrite("d.jpg", cara_1[3])
-# cv2.imwrite("e.jpg", cara_1[4])
-# cv2.imwrite("f.jpg", cara_1[5])
-# cv2.imwrite("g.jpg", cara_1[6])
-# cv2.imwrite("h.jpg", cara_1[7])
-# cv2.imwrite("i.jpg", cara_1[8])

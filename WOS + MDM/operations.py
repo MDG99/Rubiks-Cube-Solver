@@ -1,20 +1,13 @@
 import numpy as np
 
-M = [[35, 131, 169],  # Azul
-     [166, 97, 62],  # Roj0
-     [64, 159, 96],  # Verde
-     [167, 141, 61],  # Naranja
-     [158, 166, 78],  # Amarillo
-     [153, 162, 154],  # Blanco
-     [87, 106, 77]]  # Fondo
-
-M2 = [[53, 180, 183],  # Azul
-      [183, 116, 74],  # Roj0
-      [84, 180, 112],  # Verde
-      [176, 153, 66],  # Naranja
-      [163, 169, 72],  # Amarillo
-      [153, 164, 156],  # Blanco
-      [135, 149, 125]]  # Fondo
+M = [[17, 109, 149],  # Azul ya
+     [246, 83, 20],  # Roj0 ***
+     [69, 205, 84],  # Verde pálido
+     [242, 129, 20],  # Naranja ya
+     [183, 178, 52],  # Amarillo ***
+     [158, 176, 130],  # Blanco
+     [4, 17, 2]
+    ]  # Fondo
 
 
 Mejorado = [[0, 0, 255],  # Azul
@@ -54,28 +47,31 @@ def wos(img):
 
 
 def mdm(img):
+
     w = img.shape[0]
     h = img.shape[1]
 
-    aux = np.zeros((w, h, 3))
+    aux2 = np.zeros((w, h, 3))
 
     for i in range(w):
         for j in range(h):
             D = []
 
-            for p in range(clases):
-                d = pow(
-                    pow((img[i, j, 0] - M[p][0]), 2) + pow((img[i, j, 1] - M[p][1]), 2) + pow((img[i, j, 2] - M[p][2]),
-                                                                                              2), 1 / 2)
+            for p in range(7):
+                d = np.sqrt(
+                    pow((img[i, j, 0] - M[p][0]), 2) +
+                    pow((img[i, j, 1] - M[p][1]), 2) +
+                    pow((img[i, j, 2] - M[p][2]), 2)
+                    )
                 D.append(d)
 
             D_min = min(D)
 
             for r in range(clases):
                 if D[r] == D_min:
-                    aux.itemset((i, j, 0), Mejorado[r][0])
-                    aux.itemset((i, j, 1), Mejorado[r][1])
-                    aux.itemset((i, j, 2), Mejorado[r][2])
+                    aux2.itemset((i, j, 0), M[r][0])
+                    aux2.itemset((i, j, 1), M[r][1])
+                    aux2.itemset((i, j, 2), M[r][2])
 
 
-    return aux
+    return aux2

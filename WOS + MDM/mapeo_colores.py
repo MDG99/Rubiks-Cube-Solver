@@ -1,12 +1,14 @@
 import numpy as np
 
-Mejorado = [[0, 0, 255],  # Azul
-            [255, 0, 0],  # Rojo
-            [0, 255, 0],  # Verde
-            [255, 128, 0],  # Naranja
-            [255, 255, 0],  # Amarillo
-            [255, 255, 255],  # Blanco
-            [0, 0, 0]]  # Fondo
+M = [[4, 52, 81],  # Azul ya
+     [198, 51, 3],  # Roj0 ***
+     [39, 169, 43],  # Verde pálido
+     [228, 109, 6],  # Naranja ya
+     [153, 163, 30],  # Amarillo ***
+     [147, 165, 120],  # Blanco
+     [27, 55, 17]
+    ]  # Fondo
+
 
 
 def mapeo(img):
@@ -18,25 +20,25 @@ def mapeo(img):
     for i in range(w):
         for j in range(h):
 
-            if img[i, j, 2] == Mejorado[0][0] and img[i, j, 1] == Mejorado[0][1] and img[i, j, 0] == Mejorado[0][2]:
+            if img[i, j, 2] == M[0][0] and img[i, j, 1] == M[0][1] and img[i, j, 0] == M[0][2]:
                 contador[0] = contador[0] + 1
 
-            if img[i, j, 2] == Mejorado[1][0] and img[i, j, 1] == Mejorado[1][1] and img[i, j, 0] == Mejorado[1][2]:
+            if img[i, j, 2] == M[1][0] and img[i, j, 1] == M[1][1] and img[i, j, 0] == M[1][2]:
                 contador[1] = contador[1] + 1
 
-            if img[i, j, 2] == Mejorado[2][0] and img[i, j, 1] == Mejorado[2][1] and img[i, j, 0] == Mejorado[2][2]:
+            if img[i, j, 2] == M[2][0] and img[i, j, 1] == M[2][1] and img[i, j, 0] == M[2][2]:
                 contador[2] = contador[2] + 1
 
-            if img[i, j, 2] == Mejorado[3][0] and img[i, j, 1] == Mejorado[3][1] and img[i, j, 0] == Mejorado[3][2]:
+            if img[i, j, 2] == M[3][0] and img[i, j, 1] == M[3][1] and img[i, j, 0] == M[3][2]:
                 contador[3] = contador[3] + 1
 
-            if img[i, j, 2] == Mejorado[4][0] and img[i, j, 1] == Mejorado[4][1] and img[i, j, 0] == Mejorado[4][2]:
+            if img[i, j, 2] == M[4][0] and img[i, j, 1] == M[4][1] and img[i, j, 0] == M[4][2]:
                 contador[4] = contador[4] + 1
 
-            if img[i, j, 2] == Mejorado[5][0] and img[i, j, 1] == Mejorado[5][1] and img[i, j, 0] == Mejorado[5][2]:
+            if img[i, j, 2] == M[5][0] and img[i, j, 1] == M[5][1] and img[i, j, 0] == M[5][2]:
                 contador[5] = contador[5] + 1
 
-            if img[i, j, 2] == Mejorado[6][0] and img[i, j, 1] == Mejorado[6][1] and img[i, j, 0] == Mejorado[6][2]:
+            if img[i, j, 2] == M[6][0] and img[i, j, 1] == M[6][1] and img[i, j, 0] == M[6][2]:
                 contador[6] = 1
 
     moda = max(contador)

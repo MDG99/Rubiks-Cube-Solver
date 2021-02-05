@@ -16,7 +16,7 @@ salto_x = int(dif_x / 3)
 salto_y = int(dif_y / 3)
 
 # Configuración de la cámara
-video = cv2.VideoCapture(2)
+video = cv2.VideoCapture(0)
 #video.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
 #video.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
 
@@ -25,7 +25,10 @@ def draw_the_frame(image_to_draw, n):
 
     face = ["Up", "Down", "Right", "Left", "Front", "Back"]
 
-    txt_to_write = f"Cara {face[n]}"
+    if n == 6:
+        txt_to_write = "Data"
+    else:
+        txt_to_write = f"Cara {face[n]}"
 
     #Texto
     cv2.putText(image_to_draw, txt_to_write,(500, 61), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 3)
