@@ -94,51 +94,73 @@ class Esquina:
 def traductor(cadena):
     cubo = Piezas()
     for i in range(len(cadena)):
+        enter = input()    # El usuario presiona enter para hacer cada movimiento
+        mov = i + 1
+        print("----------------------------------------")
+        print("Movimiento ", mov, ":\n")
         if cadena[i] == "F":
+            print("Cara F: Giro en sentido horario\n")
             cubo.movEjesFB("F", 0)
         elif cadena[i] == "R":
+            print("Cara R: Giro en sentido horario\n")
             cubo.movEjesRL("R", 1)
         elif cadena[i] == "U":
+            print("Cara U: Giro en sentido horario\n")
             cubo.movEjesUD("U", 0)
         elif cadena[i] == "L":
+            print("Cara L: Giro en sentido horario\n")
             cubo.movEjesRL("L", 0)
         elif cadena[i] == "B":
+            print("Cara B: Giro en sentido horario\n")
             cubo.movEjesFB("B", 1)
         elif cadena[i] == "D":
+            print("Cara D: Giro en sentido horario\n")
             cubo.movEjesUD("D", 1)
         elif cadena[i] == "F'":
+            print("Cara F: Giro en sentido anti horario\n")
             cubo.movEjesFB("F", 1)
         elif cadena[i] == "R'":
+            print("Cara R: Giro en sentido anti horario\n")
             cubo.movEjesRL("R", 0)
         elif cadena[i] == "U'":
+            print("Cara U: Giro en sentido anti horario\n")
             cubo.movEjesUD("U", 1)
         elif cadena[i] == "L'":
+            print("Cara L: Giro en sentido anti horario\n")
             cubo.movEjesRL("L", 1)
         elif cadena[i] == "B'":
+            print("Cara B: Giro en sentido anti horario\n")
             cubo.movEjesFB("B", 0)
         elif cadena[i] == "D'":
+            print("Cara D: Giro en sentido anti horario\n")
             cubo.movEjesUD("D", 0)
         elif cadena[i] == "F2":
+            print("Cara F: Doble giro en sentido horario\n")
             cubo.movEjesFB("F", 0)
             cubo.imprimePieza()
             cubo.movEjesFB("F", 0)
         elif cadena[i] == "R2":
+            print("Cara R: Doble giro en sentido horario\n")
             cubo.movEjesRL("R", 1)
             cubo.imprimePieza()
             cubo.movEjesRL("R", 1)
         elif cadena[i] == "U2":
+            print("Cara U: Doble giro en sentido horario\n")
             cubo.movEjesUD("U", 0)
             cubo.imprimePieza()
             cubo.movEjesUD("U", 0)
         elif cadena[i] == "L2":
+            print("Cara L: Doble giro en sentido horario\n")
             cubo.movEjesRL("L", 0)
             cubo.imprimePieza()
             cubo.movEjesRL("L", 0)
         elif cadena[i] == "B2":
+            print("Cara B: Doble giro en sentido horario\n")
             cubo.movEjesFB("B", 1)
             cubo.imprimePieza()
             cubo.movEjesFB("B", 1)
         elif cadena[i] == "D2":
+            print("Cara D: Doble giro en sentido horario\n")
             cubo.movEjesUD("D", 1)
             cubo.imprimePieza()
             cubo.movEjesUD("D", 1)
@@ -663,7 +685,9 @@ def main():
                "D", "L", "B"]   # Esta configuración es inamovible (24 orientaciones para las piezas esquina)
 
     cubo.getPiezas(piezaCC, piezaOC, piezaCL, piezaOL, piezaCE, piezaOE)    # Función para inicializar las piezas
+    print("\nCubo de rubik a resolver:")
     cubo.imprimePieza()    # Imprime las piezas en un diagrama con sus posiciones correspondientes
+    print("Presiona enter para avanzar los movimientos\n")
 
     from rubik_solver import utils
     # cube = "wowgybwyogygybyoggrowbrgywrborwggybrbwororbwborgowryby"    # Color de las piezas del cubo en orden
